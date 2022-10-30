@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  ts-app:
+    build:
+      context: ../app
+      dockerfile: Dockerfile
+    networks:
+      - ts-network
+    container_name: ts-app
+    command: npm run dev
+    ports:
+      - '4000:3008'
+
+
+  nginx:
+    build: nginx/
+    depends_on:
+      - ts-app
+    ports:
+      - 8080:80
+    container_name: nginx
+    networks:
+      - ts-network
+     
+
+
+networks:
+  ts-network:
+    driver: bridge
+
