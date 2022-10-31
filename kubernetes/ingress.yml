@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: certi-app-ingress
+  namespace: challenge
+  labels:
+    app: certi-app
+spec:
+  rules:
+    - host: tsapp.certi.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: certi-app-svc
+                port: 
+                  number: 8080

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: certi-app
+  namespace: challenge
+  labels:
+    app: certi-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: certi-app
+  template:
+    metadata:
+      labels:
+        app: certi-app
+    spec:
+      containers:
+        - name: ts-app
+          image: thaycafe/certi-app
+          ports: 
+            - containerPort: 3008
+          command: ["npm", "run", "dev"]
